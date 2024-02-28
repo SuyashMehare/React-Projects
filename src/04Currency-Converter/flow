@@ -1,0 +1,21 @@
+User Story:
+    Convert one currency to other.
+    Ex. 1 inr to 83 usd
+    Ex. 1 uro to _ inr
+    Ex. _ XYZ to _ ABC
+
+
+
+Req:
+API  |  To fetch currencies
+From - To  | currency Types 
+Instant Swap  From-> To & To-> From  | 
+
+
+Steps:
+
+Simple Converter
+1. Select From 
+2. Select To
+
+1. Select Amount for From
