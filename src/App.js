@@ -1,11 +1,9 @@
-import { Board } from "./101Tik-Tok-Toe/Board";
-
-
+import { Game } from "./101Tik-Tok-Toe/Game";
 
 function App() {
   return (
     <>
-      <Board/>
+      <Game/>
     </>
 
   );

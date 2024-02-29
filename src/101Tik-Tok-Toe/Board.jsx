@@ -3,46 +3,40 @@ import {Square} from "./Square"
 import "./style.css"
 // import { isWinner } from "./Winner"
 
-export const Board = () => {
-
-    const[xIsNext, isxIsNext] = useState(true)
-    const[squares, setSquares] = useState(Array(9).fill(null))
+export const Board = ({ xIsNext, squares , onPlay ,}) => {
     
-    function handleClick(i){
+    let winner = whoIsWinner(squares);
 
-        console.log('handle in board');
-        let nxtMove = squares.slice();
-
-        if(xIsNext){
-
-            nxtMove[i] = "X"
-            setSquares(nxtMove)
-        }
-        else{
-            
-            nxtMove[i] = "O"
-            setSquares(nxtMove)
-        }
-        isxIsNext(!xIsNext)
+    if(winner == null){
+        winner = "Play Next Move"
+    }
+    else{
+        winner = `Winner is ${winner}`
     }
 
+    function handleClick(i){
 
-        let winner = whoIsWinner(squares);
+        
+        if(whoIsWinner(squares) || squares[i]){
+           return 
+        }
 
-        if(winner == null){
-            winner = "Play Next Move"
+        let nextSquares = squares.slice();
+
+        if(xIsNext){
+            nextSquares[i] = "X"
         }
         else{
-            winner = `Winner is ${winner}`
+            nextSquares[i] = "O"
         }
 
+        onPlay(nextSquares)
+    }
 
     return(
-        <>
-            <div className="status">
-                {winner}
-            </div>
+        <>  
 
+            <div>{winner}</div>
             <div className="board-row">
 
                 <Square nextValue={squares[0]} handleClickInBoard = {() => handleClick(0)}/>
@@ -64,7 +58,7 @@ export const Board = () => {
             
         </>
     )
-}
+}   
 
 
 function whoIsWinner(squares){
