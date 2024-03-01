@@ -33,29 +33,31 @@ export const Board = ({ xIsNext, squares , onPlay ,}) => {
         onPlay(nextSquares)
     }
 
+    function createSquares(from, to){
+
+        let cols = []
+        let rows= [] 
+
+        for(let index = from ; index <= to ; index++) {
+
+            cols.push(<Square key={index} nextValue={squares[index]} 
+                        handleClickInBoard = {() => handleClick(index)}/>)
+
+            if((index+1)%3 == 0){
+                rows.push(<div key={rows.length+1} className="board-row">{cols}</div>)
+                cols = []
+            }            
+        }
+
+        return rows
+    }
+
+    
     return(
         <>  
 
             <div>{winner}</div>
-            <div className="board-row">
-
-                <Square nextValue={squares[0]} handleClickInBoard = {() => handleClick(0)}/>
-                <Square nextValue={squares[1]} handleClickInBoard = {() => handleClick(1)}/>
-                <Square nextValue={squares[2]} handleClickInBoard = {() => handleClick(2)}/>
-            </div>
-
-            <div className="board-row">
-                <Square nextValue={squares[3]} handleClickInBoard = {() => handleClick(3)}/>
-                <Square handleClickInBoard = {() => handleClick(4)} nextValue={squares[4]}/>
-                <Square handleClickInBoard = {() => handleClick(5)} nextValue={squares[5]}/>
-            </div >
-
-            <div className="board-row">
-                <Square handleClickInBoard = {() => handleClick(6)} nextValue={squares[6]}/>
-                <Square handleClickInBoard = {() => handleClick(7)} nextValue={squares[7]}/>
-                <Square handleClickInBoard = {() => handleClick(8)} nextValue={squares[8]}/>
-            </div>
-            
+            {createSquares(0,8)}       
         </>
     )
 }   

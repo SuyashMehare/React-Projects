@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Board } from "./Board";
 
 export const Game = () =>{
 
-   
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove,setCurrentMove] = useState(0)
-
+    const [trackMoves, setTrackMoves] = useState(); 
 
     const currentSquares = history[currentMove]
     const xIsNext = currentMove%2 === 0;
-
-
-    const moves = history.map((squares,move) => {
+   
+    // setting up btn's on window for time travel
+    let moves = history.map((squares,move) => {
 
         let discription;
 
@@ -20,7 +19,7 @@ export const Game = () =>{
             discription = `Go to the move : ${move}`
         }
         else{
-            discription = `Go to game start`
+            discription = `Reset`
         }
 
         return (
@@ -29,6 +28,11 @@ export const Game = () =>{
             </li>
         )
     })
+    
+
+    useEffect(() => {
+        setTrackMoves(moves);
+    },[history])
 
 
     function handlePlay(nextSquares) {
@@ -46,6 +50,12 @@ export const Game = () =>{
     }
 
 
+    function sort() {
+
+        setTrackMoves(Object.values(trackMoves).reverse())
+
+    }
+
     return (
         <>
             <div className="game">
@@ -53,7 +63,11 @@ export const Game = () =>{
                     <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
                 </div>
                 <div className="game-info">
-                    <ol>{moves}</ol>
+
+                    <button onClick={sort}>Sort ⬇⬆</button>
+                    <ol>
+                        {trackMoves}
+                    </ol>
                 </div>
             </div>
         </>

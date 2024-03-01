@@ -1,0 +1,19 @@
+Version 1 of TikTokToe
+    - Two Player Support - X and O 
+    - 3x3 board
+    - Show winner on window as soon as any one wins (X or O)
+    - Show message of next player move on window if none of the winner is
+
+Fixed Bugs:
+    - (1) Clicking on already occupied M x N move is not possible.
+    - (2) Playing further even after winning, is not possible from here.
+
+_______________________________________________________________________________________________
+
+Version 2 of TikTokToe  
+    - Possible Time Travel- Could migrate to the desired moves (undo,redo feature)
+    - Buttons of time Travel allowed to sort in ascending/descending manner
+
+Present Bugs:
+    - Player can step back even after winning.
+    
